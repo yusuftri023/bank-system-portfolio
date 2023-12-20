@@ -51,7 +51,7 @@ router.get("/register", (req, res) => {
   res.render("register");
 });
 router.post("/register", controller.authV3.registerNewAccount, (req, res) => {
-  res.render("register_redirect_page");
+  res.redirect("/login");
 });
 router.get("/login", async (req, res) => {
   res.render("login");
