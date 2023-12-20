@@ -27,22 +27,4 @@
       <input type="submit" value="API-Docs" />
     </div>
   </form>
-  <script src="/socket.io/socket.io.js" charset="utf-8"></script>
-  <script type="text/javascript">
-    var io = io(window.location.origin, { transports: ["websocket"] });
-    io.on("notification", function (data) {
-      Notification.requestPermission().then((permission) => {
-        if (!("Notification" in window)) {
-          alert(data);
-        } else if (permission === "granted") {
-          new Notification(data);
-        } else if (permission === "denied") {
-          alert(data);
-        }
-      });
-    });
-    $("#body").ready(function () {
-      io.emit("notification", "Welcome to my project");
-    });
-  </script>
 </body>

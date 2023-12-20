@@ -6,7 +6,6 @@ const express = require("express");
 const app = express();
 const port = 3300;
 const http = require("http").createServer(app);
-const io = require("socket.io")(http, { transports: ["websocket"] });
 const path = require("path");
 const flash = require("express-flash");
 const session = require("express-session");
@@ -60,9 +59,5 @@ app.use(Sentry.Handlers.errorHandler());
 const server = http.listen(process.env.PORT || port, () =>
   console.log(`Server run at http://127.0.0.1:${port}`)
 );
-io.on("connection", (socket) => {
-  socket.on("notification", (data) => {
-    io.emit("notification", data);
-  });
-});
+
 module.exports = app;

@@ -10,7 +10,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost"
+      "url": "https://long-jade-gharial-wrap.cyclic.app"
     }
   ],
   "tags": [

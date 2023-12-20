@@ -7,16 +7,4 @@
 <body id="body">
   <h1>Redirect Page</h1>
   <p>You are being redirected to <b>Login Page</b>...</p>
-
-  <script src="/socket.io/socket.io.js" charset="utf-8"></script>
-  <script type="text/javascript">
-    var io = io(window.location.origin, { transports: ["websocket"] });
-    io.on("notification", function (data) {
-      alert(data);
-      setTimeout(() => (window.location = "/login"), 2000);
-    });
-    $("#body").ready(function () {
-      io.emit("notification", "Your account successfully created!");
-    });
-  </script>
 </body>
