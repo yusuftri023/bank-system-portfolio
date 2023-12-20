@@ -1,0 +1,14 @@
+<h2>Balance Withdrawal Page</h2>
+<form action="/api/v3/transactions/withdraws" method="post">
+  <% if(messages.error){ %>
+  <span style="color: red"> <%= messages.error %> </span>
+  <% } %>
+
+  <div>
+    <label for="amount">Withdrawal amount:</label>
+    <input type="number" id="amount" name="amount" required />
+  </div>
+  <div>
+    <input type="submit" value="Withdraw" />
+  </div>
+</form>

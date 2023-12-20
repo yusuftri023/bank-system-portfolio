@@ -1,0 +1,2322 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Basic Bank System - OpenAPI 3.0",
+    "description": "Dokumentasi API Basic Bank System\n\n- [Repository of Basic Bank System](https://github.com/yusuftri023/Basic-Banking-System)",
+    "contact": {
+      "email": "yusuftri023@gmail.com"
+    },
+    "version": "1.0.1"
+  },
+  "servers": [
+    {
+      "url": "http://localhost"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Users",
+      "description": "Users data/profiles operations"
+    },
+    {
+      "name": "Accounts",
+      "description": "Access to Accounts and its registration"
+    },
+    {
+      "name": "Transactions",
+      "description": "Operations about Transactions (Transfer ,withdraw,and deposit)"
+    },
+    {
+      "name": "Auth (Token Based Authentication)",
+      "description": "User authentication and authorization"
+    }
+  ],
+  "paths": {
+    "/register": {
+      "post": {
+        "tags": ["Auth (Token Based Authentication)"],
+        "summary": "Create a new account for the website",
+        "description": "Create a new account for the website",
+        "operationId": "registerForm",
+        "parameters": [
+          {
+            "name": "json-web-token",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "request form for registration",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_id": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "balance": {
+                    "type": "string",
+                    "example": 20000000
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "eu28219f212ej43912k!#&!@0"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "hendraww23@gmail.com"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": 201
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Account has been created"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "account_id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "user_id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "balance": {
+                          "type": "integer",
+                          "example": 100000000
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "hendrawww@gmail.com"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "integer",
+                      "example": 400
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Bad request"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "integer",
+                      "example": 404
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "User does not exist"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "integer",
+                      "example": 500
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": ["Auth (Token Based Authentication)"],
+        "summary": "Login to authenticate and create json web token",
+        "description": "Login to authenticate and create json web token",
+        "operationId": "loginAccount",
+        "requestBody": {
+          "description": "Login and authenticate user by giving json web token",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "password": {
+                    "type": "string",
+                    "example": 12345678
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "yusufhaha@gmail.com"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": 201
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Login success"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "accountData": {
+                          "type": "object",
+                          "properties": {
+                            "account_id": {
+                              "type": "integer",
+                              "example": 25
+                            },
+                            "account_number": {
+                              "type": "integer",
+                              "example": 25
+                            },
+                            "balance": {
+                              "type": "integer",
+                              "example": 1000000
+                            },
+                            "user_id": {
+                              "type": "integer",
+                              "example": 5
+                            },
+                            "email": {
+                              "type": "string",
+                              "example": "yusufhaha@gmail.com"
+                            },
+                            "createAt": {
+                              "type": "string",
+                              "example": "2023-11-07T14:08:35.000Z"
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "example": "2023-11-07T07:08:35.253Z"
+                            }
+                          }
+                        },
+                        "token": {
+                          "type": "string",
+                          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjozNywiYWNjb3VudF9udW1iZXIiOjM3LCJiYWxhbmNlIjoiMTAwMDAwIiwidXNlcl9pZCI6NSwiZW1haWwiOiJqYW1AZ21haWwuY29tIiwiY3JlYXRlQXQiOiIyMDIzLTExLTA3VDE0OjA4OjM1LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIzLTExLTA3VDA3OjA4OjM1LjI1M1oiLCJpYXQiOjE2OTkzNTA5MTEsImV4cCI6MTY5OTM1NDUxMX0.lbzDZdEdNOceKx-e82zT5A8lW15b4OrN_iD3-UwE-RU"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "integer",
+                      "example": 400
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Login failed : Your email or password does not match"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/whoami": {
+      "get": {
+        "tags": ["Auth (Token Based Authentication)"],
+        "summary": "Check the data of the current authorized user",
+        "description": "Check the data of the current authorized user",
+        "operationId": "whoami",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Account has been created"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "user": {
+                          "type": "object",
+                          "properties": {
+                            "account_id": {
+                              "type": "integer",
+                              "example": 25
+                            },
+                            "account_number": {
+                              "type": "integer",
+                              "example": 25
+                            },
+                            "balance": {
+                              "type": "integer",
+                              "example": 1000000
+                            },
+                            "user_id": {
+                              "type": "integer",
+                              "example": 5
+                            },
+                            "email": {
+                              "type": "string",
+                              "example": "yusufhaha@gmail.com"
+                            },
+                            "createAt": {
+                              "type": "string",
+                              "example": "2023-11-07T14:08:35.000Z"
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "example": "2023-11-07T07:08:35.253Z"
+                            },
+                            "iat": {
+                              "type": "integer",
+                              "example": 1699350911
+                            },
+                            "exp": {
+                              "type": "integer",
+                              "example": 1699354511
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": 401
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "You're not authorized to access this page!"
+                    },
+                    "data": {
+                      "example": null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v3/accounts": {
+      "get": {
+        "tags": ["Accounts"],
+        "summary": "Get Accounts lists",
+        "description": "Get Accounts Lists",
+        "operationId": "getAccounts",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Pagination page",
+            "required": false,
+            "explode": true,
+            "schema": {
+              "type": "number",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Pagination display limit",
+            "required": false,
+            "explode": true,
+            "schema": {
+              "type": "number",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": 8887329342
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "User data succesfully added to the database"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "account_id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "balance": {
+                          "type": "integer",
+                          "example": 1000000
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "hendraww23@gmail.com"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Failed operation should have been 200 but open api won't let response code duplicate exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "integer",
+                      "example": 404
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Data Empty"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Accounts"],
+        "summary": "Add a new account for user to database",
+        "description": "Add a new account for user to database",
+        "operationId": "Accounts",
+        "requestBody": {
+          "description": "Create a new Users in the website",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_id": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "balance": {
+                    "type": "string",
+                    "example": 20000000
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "eu28219f212ej43912k!#&!@0"
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "Serial number of identity card",
+                    "example": "hendraww23@gmail.com"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": 201
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Account has been created"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "account_id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "user_id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "balance": {
+                          "type": "integer",
+                          "example": 100000000
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "hendrawww@gmail.com"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "integer",
+                      "example": 400
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Bad request"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "integer",
+                      "example": 404
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "User does not exist"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "integer",
+                      "example": 500
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v3/accounts/{id}": {
+      "get": {
+        "tags": ["Accounts"],
+        "summary": "Get Accounts lists",
+        "description": "Get Accounts Lists",
+        "operationId": "getAccountsById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "account id",
+            "required": true,
+            "explode": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Search complete"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "account_id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "user_id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "balance": {
+                          "type": "integer",
+                          "example": 100000000
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "hendrawww@gmail.com"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "integer",
+                      "example": 400
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Bad request"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "integer",
+                      "example": 404
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Account does not exist"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Accounts"],
+        "summary": "Delete a user account from database",
+        "description": "Delete a user account from database",
+        "operationId": "deleteAccountById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "account id",
+            "required": true,
+            "explode": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Account has been deleted"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "account_id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "hendrawww@gmail.com"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "integer",
+                      "example": 400
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Bad request"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "integer",
+                      "example": 404
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Account does not exist"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v3/users": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get Users lists",
+        "description": "Get Users Lists",
+        "operationId": "getUsers",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Pagination page",
+            "required": false,
+            "explode": true,
+            "schema": {
+              "type": "number",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Pagination display limit",
+            "required": false,
+            "explode": true,
+            "schema": {
+              "type": "number",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Request has succeeded"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "user_id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "user_name": {
+                          "type": "string",
+                          "example": "Hendra Gunawan"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Failed operation should have been 200 but open api won't let response code duplicate exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "integer",
+                      "example": 204
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Data Empty"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Users"],
+        "summary": "Add a new user to database",
+        "description": "Add a new user to database",
+        "operationId": "Users",
+        "requestBody": {
+          "description": "Create a new Users in the website",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_name": {
+                    "type": "string",
+                    "example": "Hendra Gunawan"
+                  },
+                  "phone_number": {
+                    "type": "string",
+                    "example": 8887329342
+                  },
+                  "identity_type": {
+                    "type": "string",
+                    "example": "KTP"
+                  },
+                  "identity_number": {
+                    "type": "string",
+                    "description": "Serial number of identity card",
+                    "example": 779288223794
+                  },
+                  "address": {
+                    "type": "string",
+                    "description": "address",
+                    "example": "Bali"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": 8887329342
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "User data succesfully added to the database"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "user_id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "user_name": {
+                          "type": "string",
+                          "example": "Hendra Gunawan"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "integer",
+                      "example": 400
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Bad request"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "One of inputted data already exist in database and need to be unique",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "integer",
+                      "example": 409
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v3/users/{id}": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get Users details by userid",
+        "description": "Get Users details by userid",
+        "operationId": "getUsersById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "user id",
+            "required": true,
+            "explode": true,
+            "schema": {
+              "type": "number",
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "User data succesfully added to the database"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "user_id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "user_name": {
+                          "type": "string",
+                          "example": "Hendra Gunawan"
+                        },
+                        "profiles": {
+                          "type": "object",
+                          "properties": {
+                            "profile_id": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "user_id": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "phone_number": {
+                              "type": "string",
+                              "example": 8887329342
+                            },
+                            "identity_type": {
+                              "type": "string",
+                              "example": "KTP"
+                            },
+                            "identity_number": {
+                              "type": "string",
+                              "description": "Serial number of identity card",
+                              "example": 779288223794
+                            },
+                            "address": {
+                              "type": "string",
+                              "description": "address",
+                              "example": "Bali"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "integer",
+                      "example": 400
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Bad request"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Users"],
+        "summary": "Update the existing user data",
+        "description": "Update the existing user data",
+        "operationId": "putUsersById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "user id",
+            "required": true,
+            "explode": true,
+            "schema": {
+              "type": "number",
+              "default": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Create a new Users in the website",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_name": {
+                    "type": "string",
+                    "example": "Hendra Gunawan"
+                  },
+                  "phone_number": {
+                    "type": "string",
+                    "example": 8887329342
+                  },
+                  "identity_type": {
+                    "type": "string",
+                    "example": "KTP"
+                  },
+                  "identity_number": {
+                    "type": "string",
+                    "description": "Serial number of identity card",
+                    "example": 779288223794
+                  },
+                  "address": {
+                    "type": "string",
+                    "description": "address",
+                    "example": "Bali"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "succesfully update user data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": 201
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "User data succesfully updated"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": 400
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Bad request"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Data not found in database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": 404
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "User not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Data not found in database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": 409
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "data already exist"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Users"],
+        "summary": "Delete a user from database",
+        "description": "Delete a user from database",
+        "operationId": "deleteUsersById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "user id",
+            "required": true,
+            "explode": true,
+            "schema": {
+              "type": "number",
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Users successfully deleted"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "user_id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "user_name": {
+                          "type": "string",
+                          "example": "Hendra Gunawan"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "integer",
+                      "example": 400
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Bad request"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "integer",
+                      "example": 404
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "User does not exist"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v3/transactions/transfers/": {
+      "post": {
+        "tags": ["Transactions"],
+        "summary": "Balance Transfer feature",
+        "description": "Balance Transfer feature",
+        "operationId": "postTransfers",
+        "requestBody": {
+          "description": "Create a new Transaction in the website",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "amount": {
+                    "type": "integer",
+                    "description": "nilai transaksi yang dilakukan",
+                    "example": 100000
+                  },
+                  "norek_penerima": {
+                    "type": "integer",
+                    "description": "account number of recipient",
+                    "example": 1
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": 201
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Transaction complete"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "transaction_id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "transaction_type": {
+                          "type": "string",
+                          "example": "Transfer"
+                        },
+                        "amount": {
+                          "type": "integer",
+                          "example": 10000000
+                        },
+                        "transaction_time": {
+                          "type": "integer",
+                          "example": "2023-11-06T04:35:24.000Z"
+                        },
+                        "destination_account": {
+                          "type": "integer",
+                          "example": 3
+                        },
+                        "source_account": {
+                          "type": "integer",
+                          "example": 1
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "integer",
+                      "example": 400
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Bad request"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "integer",
+                      "example": 404
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Bad request"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "integer",
+                      "example": 500
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ]
+      }
+    },
+    "/api/v3/transactions/withdraws/": {
+      "post": {
+        "tags": ["Transactions"],
+        "summary": "Balance Withdrawal feature",
+        "description": "Balance Withdrawal feature",
+        "operationId": "postWithdraws",
+        "requestBody": {
+          "description": "Withdraw cash from bank account",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "amount": {
+                    "type": "integer",
+                    "description": "nilai transaksi yang dilakukan",
+                    "example": 100000
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": 201
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Transaction complete"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "transaction_id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "transaction_type": {
+                          "type": "string",
+                          "example": "Withdraw"
+                        },
+                        "amount": {
+                          "type": "integer",
+                          "example": 10000000
+                        },
+                        "transaction_time": {
+                          "type": "integer",
+                          "example": "2023-11-06T04:35:24.000Z"
+                        },
+                        "destination_account": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "source_account": {
+                          "type": "integer",
+                          "example": 1
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "integer",
+                      "example": 400
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Bad request"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "integer",
+                      "example": 404
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Account does not exist"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "integer",
+                      "example": 500
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ]
+      }
+    },
+    "/api/v3/transactions/deposits/": {
+      "post": {
+        "tags": ["Transactions"],
+        "summary": "Balance Deposit feature",
+        "description": "Balance Deposit feature",
+        "operationId": "postDeposits",
+        "requestBody": {
+          "description": "Deposit cash to bank account",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "amount": {
+                    "type": "integer",
+                    "description": "nilai transaksi yang dilakukan",
+                    "example": 100000
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": 201
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Transaction complete"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "transaction_id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "transaction_type": {
+                          "type": "string",
+                          "example": "Deposit"
+                        },
+                        "amount": {
+                          "type": "integer",
+                          "example": 10000000
+                        },
+                        "transaction_time": {
+                          "type": "integer",
+                          "example": "2023-11-06T04:35:24.000Z"
+                        },
+                        "destination_account": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "source_account": {
+                          "type": "integer",
+                          "example": 1
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "integer",
+                      "example": 400
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Bad request"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "integer",
+                      "example": 404
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Account does not exist"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "integer",
+                      "example": 500
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ]
+      }
+    },
+    "/api/v3/transactions": {
+      "get": {
+        "tags": ["Transactions"],
+        "summary": "Get Transactions lists",
+        "description": "Get Transactions Lists",
+        "operationId": "getTransactions",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Pagination page",
+            "required": false,
+            "explode": true,
+            "schema": {
+              "type": "number",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Pagination display limit",
+            "required": false,
+            "explode": true,
+            "schema": {
+              "type": "number",
+              "default": 10
+            }
+          },
+          {
+            "name": "search_amount",
+            "in": "query",
+            "description": "Search feature by the amount of transaction is done",
+            "required": false,
+            "explode": true,
+            "schema": {
+              "type": "number",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": 8887329342
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "User data succesfully added to the database"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "transaction_id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "transaction_type": {
+                          "type": "string",
+                          "example": "Transfer"
+                        },
+                        "amount": {
+                          "type": "integer",
+                          "example": 1000000
+                        },
+                        "transaction_time": {
+                          "type": "string",
+                          "example": "2023-11-02T13:57:56.000Z"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Failed operation should have been 200 but open api won't let response code duplicate exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "integer",
+                      "example": 204
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Data Empty"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v3/transactions/{id}": {
+      "get": {
+        "tags": ["Transactions"],
+        "summary": "Get lists of transactions in an account",
+        "description": "Get lists of transactions in an account",
+        "operationId": "getTransactionsByAccountId",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Pagination page",
+            "required": false,
+            "explode": true,
+            "schema": {
+              "type": "number",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Pagination display limit",
+            "required": false,
+            "explode": true,
+            "schema": {
+              "type": "number",
+              "default": 10
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "account id",
+            "required": true,
+            "explode": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": 8887329342
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "User data succesfully added to the database"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "transaction_id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "transaction_type": {
+                          "type": "string",
+                          "example": "Transfer"
+                        },
+                        "amount": {
+                          "type": "integer",
+                          "example": 1000000
+                        },
+                        "transaction_time": {
+                          "type": "string",
+                          "example": "2023-11-02T13:57:56.000Z"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Failed operation should have been 200 but open api won't let response code duplicate exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "integer",
+                      "example": 204
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Data Empty"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Transactions"],
+        "summary": "Delete a transaction from database",
+        "description": "Delete a transaction from database",
+        "operationId": "deleteTransactionById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "account id",
+            "required": true,
+            "explode": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Account has been deleted"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "transaction_id": {
+                          "type": "integer",
+                          "example": 1
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "integer",
+                      "example": 400
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Bad request"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Data not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Fail"
+                    },
+                    "code": {
+                      "type": "integer",
+                      "example": 404
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Data not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "authorization": {
+        "type": "apiKey",
+        "name": "authorization",
+        "in": "header"
+      },
+      "cookieAuth": {
+        "type": "apiKey",
+        "name": "access_token",
+        "in": "cookie"
+      }
+    }
+  }
+}

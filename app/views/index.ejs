@@ -1,0 +1,48 @@
+<title>Basic Bank System - Yusuf's Portfolio</title>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+  integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+  crossorigin="anonymous"
+></script>
+<body id="body">
+  <h1>Basic Bank System Index</h1>
+  <p style="max-width: 25em">
+    Welcome to my portfolio website!<br />
+    I'll constantly update this website as my skill's grow, but as i am leaning
+    more to back-end side of things the UI is practically barebone.
+    <br />
+  </p>
+  <p><i>- Yusuf Trihartono Tonapa</i></p>
+  <br />
+
+  <p>Try authentication feature here</p>
+  <form action="/login" method="get">
+    <div>
+      <input type="submit" value="Log In" />
+    </div>
+  </form>
+  <p>You can see my REST API Documentation here</p>
+  <form action="/api-docs" method="get">
+    <div>
+      <input type="submit" value="API-Docs" />
+    </div>
+  </form>
+  <script src="/socket.io/socket.io.js" charset="utf-8"></script>
+  <script type="text/javascript">
+    var io = io(window.location.origin, { transports: ["websocket"] });
+    io.on("notification", function (data) {
+      Notification.requestPermission().then((permission) => {
+        if (!("Notification" in window)) {
+          alert(data);
+        } else if (permission === "granted") {
+          new Notification(data);
+        } else if (permission === "denied") {
+          alert(data);
+        }
+      });
+    });
+    $("#body").ready(function () {
+      io.emit("notification", "Welcome to my project");
+    });
+  </script>
+</body>

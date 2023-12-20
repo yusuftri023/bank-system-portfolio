@@ -1,0 +1,56 @@
+model >>> tempat fungsi atau tempat pengelolaan data
+
+
+
+controller >>> callback yang digunakan oleh endpoint
+contoh:
+router.get('/users',(req,res)=>{})
+router.get('/users',async (req,res){})
+router.get('/users',function(req,res){})
+router.get('/users',async function(req,res){})
+                    (req,res)=>{} ini callbacknya
+setelah koma adalah letak callback, jadi kalau callback function yang kita siapkan dengan exports dari
+folder controller di file users.js nama fungsi callbacknya getUsers
+router.get('/users', controller.users.getUsers)
+
+
+contoh callback function nya
+
+async get(req, res){
+        const { search, page, limit } = req.query;
+        console.log(req.query);
+        let result = await model.get(search, page, limit)
+        if(!result.length) {
+            return res.status(200).json({
+                status: 'success',
+                code: 200,
+                message: 'Data Empty'
+            })
+        }
+
+        if(search){
+            result = result.filter((el) => {
+                return el.name.toLowerCase().includes(search)
+            })
+        }
+
+        return res.status(200).json({
+            status: 'success',
+            code: 200,
+            message: 'Success!',
+            data: result
+        })
+    }
+
+ini nanti di exports dengan cara
+module.exports = {methodnya}  <<<< kalau mau diexport langsung dengan cara menjadi method
+module.exports = {nama fungsinya}  <<<<< kalau fungsi udah dibuat sebelum di exports
+exports.namafungsinya = nama fungsi  <<<<< kalau fungsi yang udah dibuat dimasukkan keobjek dan akhirnya jadi method
+
+router >>> berisi endpoint-endpoint yang ada
+(contoh: endpoint yang berhubungan dengan user disimpan di folder router dengan nama file users.js )
+contoh filenya
+router.get('/users', controller.users.get)
+router.get('/users/:id', controller.users.getById)
+router.post('/users', controller.users.create)
+router.delete('/users/:id', controller.users.destroy)

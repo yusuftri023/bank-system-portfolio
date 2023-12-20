@@ -1,0 +1,78 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model accounts {
+  account_id                                         Int            @id @default(autoincrement())
+  account_number                                     Int            @default(autoincrement()) @unique
+  balance                                            Decimal        @default(100000) @db.Decimal(15, 2)
+  user_id                                            Int
+  email                                              String         @unique
+  googleId                                           String?
+  password                                           String
+  status                                             status
+  role                                               role
+  createAt                                           DateTime       @default(dbgenerated("CURRENT_TIMESTAMP(0)")) @db.Timestamp(6)
+  updatedAt                                          DateTime       @updatedAt
+  users                                              users          @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+  transactionSource transactions[] @relation("source")
+  transactionDestination transactions[] @relation("destination")
+}
+
+model profiles {
+  profile_id      Int        @id @default(autoincrement())
+  user_id         Int
+  phone_number    String?
+  identity_type   identity_card?
+  address         String?
+  profile_picture String?
+  users           users      @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+}
+
+model transactions {
+  transaction_id                                 Int       @id @default(autoincrement())
+  transaction_type                               transactionType
+  amount                                         Decimal  @db.Decimal(15, 2)
+  transaction_time                               DateTime @default(dbgenerated("CURRENT_TIMESTAMP(0)")) @db.Timestamp(6)
+  destination_account                            Int
+  destinationNumber accounts? @relation(name: "destination", fields: [destination_account], references:[account_number])
+  source_account                                 Int
+  sourceNumber accounts @relation(name: "source", fields: [source_account], references:[account_number], onDelete: Cascade, onUpdate: Cascade)
+}
+
+
+model users {
+  user_id   Int               @id @default(autoincrement())
+  user_name String
+  identity_number String     @unique
+  accounts  accounts[]
+  profiles  profiles[]
+}
+
+enum identity_card {
+  KTP
+  SIM
+  Passport
+}
+
+enum transactionType {
+  Deposit
+  Withdraw
+  Transfer
+}
+
+enum status {
+  Open
+  Closed
+}
+
+enum role {
+  Admin
+  User
+}
