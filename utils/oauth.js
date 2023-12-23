@@ -14,7 +14,7 @@ passport.use(
       clientSecret: GOOGLE_CLIENT_SECRET,
       callbackURL:
         NODE_ENV === "development"
-          ? `http://localhost/auth/google/callback`
+          ? `http://localhost:3000/auth/google/callback`
           : "https://long-jade-gharial-wrap.cyclic.app/auth/google/callback",
     },
     async function (accessToken, refreshToken, profile, done) {

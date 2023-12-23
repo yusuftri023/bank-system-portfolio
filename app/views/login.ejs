@@ -1,27 +1,147 @@
-<script src="https://accounts.google.com/gsi/client" async></script>
-<h2>Login Page</h2>
-<form action="/login" method="post">
-  <% if(messages.error){ %>
-  <span style="color: red"> <%= messages.error %> </span>
-  <% } %>
-  <div>
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required />
-  </div>
-  <div>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required />
-  </div>
-  <div>
-    <input type="submit" value="Login" />
-  </div>
-</form>
-<div>
-  <p><a href="/resetpassword">Forgot password?</a></p>
-</div>
-<h3>or</h3>
-<div>
-  <a href="/auth/google"> Sign in with Google </a>
-</div>
-<br />
-<p>No account yet? <a href="/register">Register now</a></p>
+<head>
+  <style>
+    body {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      display: flex;
+      padding: 0;
+      align-items: center;
+      justify-content: center;
+      background-image: url("https://img.freepik.com/free-photo/blue-abstract-gradient-wave-wallpaper_53876-108364.jpg?w=1060&t=st=1702731050~exp=1702731650~hmac=fe78df2bcc50faa76fa53fa4cfb764a42dc629128e269cbcb4a7a4a74aa9a9bf");
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    main {
+      position: inherit;
+      background-color: rgba(188, 209, 209, 0.159);
+      box-shadow: 0 0.5em 0.5em rgba(49, 53, 53, 0.84);
+      width: 400px;
+      height: 450px;
+      margin: auto;
+      padding: 2rem;
+      border-radius: 1rem;
+    }
+    .title {
+      color: rgb(0, 0, 0);
+      font-weight: 900;
+      font-family: sans-serif;
+      text-align: center;
+    }
+    div {
+      font-family: sans-serif;
+    }
+    label {
+      display: block;
+      padding: 0.5rem 0;
+    }
+    .btn-login {
+      margin-left: 50%;
+      transform: translateX(-50%);
+      margin-top: 2rem;
+      width: 11rem;
+      height: 2.5rem;
+      border-radius: 1rem;
+      border-style: none;
+      background-image: linear-gradient(
+        120deg,
+        rgba(42, 160, 239, 0.559) 80%,
+        rgba(155, 228, 246, 0.711)
+      );
+      box-shadow: 0 2px 2px rgba(42, 41, 43, 0.711);
+      text-align: center;
+      justify-items: center;
+      transition: all 0.1s;
+      font-size: 17px;
+      font-weight: 900;
+      color: aliceblue;
+    }
+    .btn-login:active {
+      transform: translate(-50%, 2px);
+    }
+    .inputs {
+      width: 100%;
+      height: 2rem;
+      font-size: 14px;
+    }
+    h1 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 1000;
+    }
+    h3 {
+      text-align: center;
+      color: grey;
+    }
+    .forgot-btn {
+      text-align: right;
+    }
+    .btn-login-options {
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <script src="https://accounts.google.com/gsi/client" async></script>
+  <main>
+    <h1>LOGIN</h1>
+    <form action="/login" method="post">
+      <% if(messages.error){ %>
+      <span style="color: red"> <%= messages.error %> </span>
+      <% } %>
+      <div>
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="inputs"
+          placeholder="Your Email"
+          required
+        />
+      </div>
+      <div>
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="inputs"
+          placeholder="Your Password"
+          required
+        />
+      </div>
+      <div>
+        <input type="submit" value="Login" class="btn-login" />
+      </div>
+    </form>
+    <div>
+      <p class="forgot-btn"><a href="/resetpassword">Forgot password?</a></p>
+      <h3>or</h3>
+      <div class="btn-login-options">
+        <div
+          id="g_id_onload"
+          data-client_id="484654102340-6iqu87gjpts0o1np1b19hqtg7u09579m.apps.googleusercontent.com"
+          data-context="signin"
+          data-ux_mode="popup"
+          data-login_uri="http://localhost:3000/login/google"
+          data-auto_prompt="false"
+        ></div>
+
+        <div
+          class="g_id_signin"
+          data-type="icon"
+          data-shape="circle"
+          data-theme="filled_blue"
+          data-text="signin_with"
+          data-size="large"
+        ></div>
+      </div>
+      <a href="/auth/google"> Sign in with Google </a>
+      <p class="noaccount">
+        No account yet? <a href="/register">Register now</a>
+      </p>
+    </div>
+  </main>
+  <script></script>
+</body>

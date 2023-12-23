@@ -28,7 +28,7 @@ router.get("/dashboard", authCookies, controller.authV3.dashboard);
 router.get(
   "/auth/google",
   passportOauth.authenticate("google", {
-    scope: ["profile", "email"],
+    scope: ["profile", "email", "openid"],
   })
 );
 router.get(
@@ -44,6 +44,19 @@ router.get(
       .redirect("/dashboard");
   }
 );
+const { OAuth2Client } = require("google-auth-library");
+const client = new OAuth2Client();
+let { JWT_SECRET_KEY, GOOGLE_CLIENT_ID } = process.env;
+
+router.post("/login/google", async (req, res, next) => {
+  const ticket = await client.verifyIdToken({
+    idToken: req.body.credential,
+    audience: GOOGLE_CLIENT_ID,
+  });
+  const payload = ticket.getPayload();
+  const { sub: googleId } = payload;
+  console.log(googleId);
+});
 
 // token based authentication
 router.get("/whoami", authCookies, controller.authV3.whoami);

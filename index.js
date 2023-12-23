@@ -4,7 +4,7 @@ const { ProfilingIntegration } = require("@sentry/profiling-node");
 const Sentry = require("@sentry/node");
 const express = require("express");
 const app = express();
-const port = 3300;
+const port = 3000;
 const http = require("http").createServer(app);
 const path = require("path");
 const flash = require("express-flash");
@@ -56,7 +56,7 @@ app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerJSON));
 app.use(routers);
 app.use(Sentry.Handlers.errorHandler());
 
-const server = http.listen(process.env.PORT || port, () =>
+http.listen(process.env.PORT || port, () =>
   console.log(`Server run at http://127.0.0.1:${port}`)
 );
 
