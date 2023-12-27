@@ -15,11 +15,11 @@ module.exports = {
       }
       if (
         process.env.NODE_ENV === "production" &&
-        !contents.includes(`"url": "https://long-jade-gharial-wrap.cyclic.app"`)
+        !contents.includes(`"url": "https://bank-system-api.onrender.com"`)
       ) {
         replaced = contents.replace(
           /"url": ".+"/,
-          `"url": "https://long-jade-gharial-wrap.cyclic.app"`
+          `"url": "https://bank-system-api.onrender.com"`
         );
       }
 

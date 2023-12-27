@@ -21,6 +21,7 @@
       margin: auto;
       padding: 2rem;
       border-radius: 1rem;
+      min-width: 400px;
     }
     .title {
       color: rgb(0, 0, 0);
@@ -79,6 +80,27 @@
       display: flex;
       justify-content: center;
     }
+    .sign-options-icon-container {
+      align-items: center;
+      justify-content: center;
+      display: flex;
+    }
+    .google-icon {
+      width: 30px;
+      background-color: rgba(255, 255, 255, 0.622);
+      padding: 3px;
+      border-radius: 100%;
+      transition: all 0.05s;
+    }
+    .google-icon:hover {
+      cursor: pointer;
+    }
+    .google-icon:active {
+      transform: translateY(1px);
+    }
+    .noaccount {
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -118,30 +140,22 @@
     <div>
       <p class="forgot-btn"><a href="/resetpassword">Forgot password?</a></p>
       <h3>or</h3>
-      <div class="btn-login-options">
-        <div
-          id="g_id_onload"
-          data-client_id="484654102340-6iqu87gjpts0o1np1b19hqtg7u09579m.apps.googleusercontent.com"
-          data-context="signin"
-          data-ux_mode="popup"
-          data-login_uri="http://localhost:3000/login/google"
-          data-auto_prompt="false"
-        ></div>
 
-        <div
-          class="g_id_signin"
-          data-type="icon"
-          data-shape="circle"
-          data-theme="filled_blue"
-          data-text="signin_with"
-          data-size="large"
-        ></div>
+      <div class="sign-options-icon-container">
+        <img
+          class="google-icon"
+          src="/assets/70987158-4069c900-20b7-11ea-892e-8a2e1166b6b7.png"
+          alt="google icon"
+        />
       </div>
-      <a href="/auth/google"> Sign in with Google </a>
       <p class="noaccount">
         No account yet? <a href="/register">Register now</a>
       </p>
     </div>
   </main>
-  <script></script>
+  <script>
+    document.querySelector(".google-icon").addEventListener("click", () => {
+      window.location.href = "/auth/google";
+    });
+  </script>
 </body>

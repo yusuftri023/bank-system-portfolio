@@ -2,7 +2,7 @@
   "openapi": "3.0.3",
   "info": {
     "title": "Basic Bank System - OpenAPI 3.0",
-    "description": "Dokumentasi API Basic Bank System\n\n- [Repository of Basic Bank System](https://github.com/yusuftri023/Basic-Banking-System)",
+    "description": "Dokumentasi API Basic Bank System\n\n- [Repository of Basic Bank System](https://github.com/yusuftri023/bank-system-portfolio)",
     "contact": {
       "email": "yusuftri023@gmail.com"
     },
@@ -10,7 +10,7 @@
   },
   "servers": [
     {
-      "url": "https://long-jade-gharial-wrap.cyclic.app"
+      "url": "https://bank-system-api.onrender.com"
     }
   ],
   "tags": [
