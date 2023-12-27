@@ -15,7 +15,7 @@ passport.use(
       callbackURL:
         NODE_ENV === "development"
           ? `http://localhost:3000/auth/google/callback`
-          : "https://long-jade-gharial-wrap.cyclic.app/auth/google/callback",
+          : "https://bank-system-api.onrender.com/auth/google/callback",
     },
     async function (accessToken, refreshToken, profile, done) {
       try {
